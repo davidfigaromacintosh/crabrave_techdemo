@@ -1,0 +1,313 @@
+                                ;;Nagłówek iNES
+                                PRG_COUNT	equ 64
+                                CHR_COUNT	equ 0
+                                MIRRORING	equ 0
+                                BATTERY		equ 0
+                                MAPPER		equ 2
+                                
+      4E 45 53 1A               db	"NES", $1a		;NES + EOF
+      40                        db	64 & 255	;PRG 16KB
+      00                        db	0		;CHR 8KB
+      20                        db	((2 & $f) << 4) | (0 << 1) | 0
+      08                        db	%00001000 | (2 & $f0)
+                                
+      00 00 00 07 00 00 00 00   db	$00, $00, $00, $07, $00, $00, $00, $00
+                                
+                                ;; === PRG Bank 0 === ;;
+      50 59 57 4C 5F 58 2F 2B.. .incbin "snd/snd_01"
+      64 64 67 66 67 68 65 65.. .incbin "snd/snd_02"
+      3E 32 27 3C 34 16 32 4C.. .incbin "snd/snd_03"
+      65 62 60 5E 5C 5B 5B 57.. .incbin "snd/snd_04"
+      1E 1E 1B 18 14 13 16 15.. .incbin "snd/snd_05"
+      69 68 68 69 6A 6B 6C 6C.. .incbin "snd/snd_06"
+      28 27 28 25 21 1F 1C 1B.. .incbin "snd/snd_07"
+      42 42 42 42 42 42 42 42.. .incbin "snd/snd_08"
+      49 49 48 48 47 47 47 46.. .incbin "snd/snd_09"
+      5B 59 62 68 65 60 5B 5B.. .incbin "snd/snd_10"
+      5A 58 5A 5C 5C 59 59 59.. .incbin "snd/snd_11"
+      43 62 67 43 35 3D 4D 4B.. .incbin "snd/snd_12"
+      45 46 45 44 44 44 43 42.. .incbin "snd/snd_13"
+      53 53 54 54 54 55 55 55.. .incbin "snd/snd_14"
+      78 78 78 78 78 77 77 77.. .incbin "snd/snd_15"
+      5B 5A 56 55 57 58 58 5A.. .incbin "snd/snd_16"
+      4D 4C 4C 4C 4D 4E 4F 50.. .incbin "snd/snd_17"
+      18 19 19 19 19 19 17 16.. .incbin "snd/snd_18"
+      4F 52 55 58 5A 5B 5C 5D.. .incbin "snd/snd_19"
+      60 5E 53 47 3E 34 31 37.. .incbin "snd/snd_20"
+      3F 44 44 3E 3B 3D 4B 55.. .incbin "snd/snd_21"
+      28 25 26 29 26 24 26 25.. .incbin "snd/snd_22"
+      5B 5C 5E 60 62 63 5F 5D.. .incbin "snd/snd_23"
+      50 4E 4A 49 48 48 4B 4E.. .incbin "snd/snd_24"
+      3F 3C 3A 3A 37 35 36 35.. .incbin "snd/snd_25"
+      58 58 58 58 58 57 57 57.. .incbin "snd/snd_26"
+      30 30 31 30 31 32 32 33.. .incbin "snd/snd_27"
+      1A 1A 15 13 0E 0D 10 12.. .incbin "snd/snd_28"
+      1E 1B 17 1B 22 20 1D 1A.. .incbin "snd/snd_29"
+      4B 44 4C 5A 4F 43 52 55.. .incbin "snd/snd_30"
+      37 38 3A 3C 3C 3E 41 43.. .incbin "snd/snd_31"
+      1B 1C 1B 1A 1A 1A 1A 1A.. .incbin "snd/snd_32"
+      0F 11 12 14 15 15 16 16.. .incbin "snd/snd_33"
+      29 2B 2B 2C 2D 2F 30 2F.. .incbin "snd/snd_34"
+      49 48 47 47 46 45 44 44.. .incbin "snd/snd_35"
+      68 68 69 69 68 67 67 67.. .incbin "snd/snd_36"
+      6A 6A 6A 69 68 66 65 63.. .incbin "snd/snd_37"
+      19 19 19 19 19 1A 1A 1B.. .incbin "snd/snd_38"
+      5F 54 4C 59 61 5A 5C 5C.. .incbin "snd/snd_39"
+      5E 5E 60 60 61 62 63 65.. .incbin "snd/snd_40"
+      40 44 48 49 47 46 47 49.. .incbin "snd/snd_41"
+                                .base	$8000
+08000 15 15 15 13 13 14 13 13.. .incbin "snd/snd_42"
+085EC FF                        db $ff
+085ED 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           ;; === PRG Bank 42 === ;;
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           .base	$8000
+08000 00 00 00 00 00 00 00 00.. .org	$c000
+0C000                           
+0C000                           ;; === PRG Bank L === ;;
+0C000                           .base	$c000
+0C000                           
+0C000                           RESET:
+0C000 78                        sei
+0C001 D8                        cld
+0C002                           
+0C002 A2 40                     ldx #$40
+0C004 8E 17 40                  stx $4017
+0C007                           
+0C007 A2 FF                     ldx #$ff
+0C009 9A                        txs
+0C00A                           
+0C00A E8                        inx
+0C00B 8E 00 80                  stx $8000
+0C00E 8E 01 20                  stx $2001
+0C011                           
+0C011                           @clearRAM
+0C011 A9 00                     lda #$00
+0C013 95 00                     sta $0000,x
+0C015 9D 00 01                  sta $0100,x
+0C018 9D 00 03                  sta $0300,x
+0C01B 9D 00 04                  sta $0400,x
+0C01E 9D 00 05                  sta $0500,x
+0C021 9D 00 06                  sta $0600,x
+0C024 9D 00 07                  sta $0700,x
+0C027 A9 FF                     lda #$ff
+0C029 9D 00 02                  sta $0200,x
+0C02C E8                        inx
+0C02D D0 E2                     bne @clearRAM
+0C02F                           
+0C02F AD 02 20                  lda $2002
+0C032                           
+0C032 A9 3F                     lda #$3f
+0C034 8D 06 20                  sta $2006
+0C037 A9 00                     lda #$00
+0C039 8D 06 20                  sta $2006
+0C03C                           
+0C03C                           ;lda #$31
+0C03C                           ;sta $2007
+0C03C A9 01                     lda #$01
+0C03E 8D 07 20                  sta $2007
+0C041 A9 01                     lda #$01
+0C043 8D 07 20                  sta $2007
+0C046 A9 0F                     lda #$0f
+0C048 8D 07 20                  sta $2007
+0C04B A9 0F                     lda #$0f
+0C04D 8D 07 20                  sta $2007
+0C050                           
+0C050                           ;lda #$33
+0C050                           ;sta $2007
+0C050 A9 13                     lda #$13
+0C052 8D 07 20                  sta $2007
+0C055 A9 13                     lda #$13
+0C057 8D 07 20                  sta $2007
+0C05A A9 03                     lda #$03
+0C05C 8D 07 20                  sta $2007
+0C05F A9 0F                     lda #$0f
+0C061 8D 07 20                  sta $2007
+0C064                           
+0C064                           ;lda #$35
+0C064                           ;sta $2007
+0C064 A9 25                     lda #$25
+0C066 8D 07 20                  sta $2007
+0C069 A9 15                     lda #$15
+0C06B 8D 07 20                  sta $2007
+0C06E A9 05                     lda #$05
+0C070 8D 07 20                  sta $2007
+0C073 A9 0F                     lda #$0f
+0C075 8D 07 20                  sta $2007
+0C078                           
+0C078                           ;lda #$37
+0C078                           ;sta $2007
+0C078 A9 37                     lda #$37
+0C07A 8D 07 20                  sta $2007
+0C07D A9 27                     lda #$27
+0C07F 8D 07 20                  sta $2007
+0C082 A9 17                     lda #$17
+0C084 8D 07 20                  sta $2007
+0C087 A9 07                     lda #$07
+0C089 8D 07 20                  sta $2007
+0C08C                           
+0C08C A9 00                     lda #$00
+0C08E 8D 06 20                  sta $2006
+0C091 8D 06 20                  sta $2006
+0C094 A2 20                     ldx #$20
+0C096                           
+0C096 A9 80                     lda #$80
+0C098 85 01                     sta $01
+0C09A                           @loadCHR0
+0C09A B1 00                     lda ($00),y
+0C09C 0A                        asl
+0C09D 0A                        asl
+0C09E 71 00                     adc ($00),y
+0C0A0 18                        clc
+0C0A1 8D 07 20                  sta $2007
+0C0A4 C8                        iny
+0C0A5 D0 F3                     bne @loadCHR0
+0C0A7 E6 01                     inc $01
+0C0A9 CA                        dex
+0C0AA D0 EE                     bne @loadCHR0
+0C0AC                           
+0C0AC AD 02 20                  lda $2002
+0C0AF A9 20                     lda #$20
+0C0B1 8D 06 20                  sta $2006
+0C0B4 A9 00                     lda #$00
+0C0B6 8D 06 20                  sta $2006
+0C0B9                           
+0C0B9 A0 10                     ldy #$10
+0C0BB                           @loadBG
+0C0BB 8E 07 20                  stx $2007
+0C0BE E8                        inx
+0C0BF D0 FA                     bne @loadBG
+0C0C1 88                        dey
+0C0C2 D0 F7                     bne @loadBG
+0C0C4                           
+0C0C4 A9 02                     lda #$02
+0C0C6 8D 14 40                  sta $4014
+0C0C9                           
+0C0C9 A9 00                     lda #$00
+0C0CB 8D 06 20                  sta $2006
+0C0CE 8D 06 20                  sta $2006
+0C0D1 8D 05 20                  sta $2005
+0C0D4 8D 05 20                  sta $2005
+0C0D7                           
+0C0D7                           
+0C0D7 A9 1E                     lda #%00011110
+0C0D9 8D 01 20                  sta $2001
+0C0DC 8E 00 20                  stx $2000
+0C0DF                           
+0C0DF                           @vbl0
+0C0DF 2C 02 20                  bit $2002
+0C0E2 10 FB                     bpl @vbl0
+0C0E4                           
+0C0E4 A0 80                     ldy #$80
+0C0E6 A2 00                     ldx #$00
+0C0E8 86 01                     stx $01
+0C0EA                           
+0C0EA                           @play
+0C0EA A9 3F                     lda #$3f
+0C0EC 8D 06 20                  sta $2006
+0C0EF A1 00                     lda ($00,x)
+0C0F1 C9 FF                     cmp #$ff
+0C0F3 D0 0C                     bne @skipResetPlay
+0C0F5 86 00                     stx $00
+0C0F7 86 02                     stx $02
+0C0F9 8E 00 80                  stx $8000
+0C0FC 84 01                     sty $01
+0C0FE                           ;lda ($00,x)
+0C0FE 4C 02 C1                  jmp @resetPlayEnd
+0C101                           @skipResetPlay
+0C101                           ;ldx #$00
+0C101 EA                        nop
+0C102                           ;nop
+0C102                           ;nop
+0C102                           ;nop
+0C102                           ;nop
+0C102                           ;nop
+0C102                           ;lda ($00,x)
+0C102                           @resetPlayEnd
+0C102                           ;lsr
+0C102 8D 11 40                  sta $4011
+0C105 29 1F                     and #$1f
+0C107 8D 06 20                  sta $2006
+0C10A                           
+0C10A E6 00                     inc $00
+0C10C D0 14                     bne @skipHIWORDinc
+0C10E E6 01                     inc $01
+0C110 A5 01                     lda $01
+0C112 C9 C0                     cmp #$c0
+0C114 D0 0C                     bne @skipHIWORDinc
+0C116 84 01                     sty $01
+0C118 E6 02                     inc $02
+0C11A A5 02                     lda $02
+0C11C 8D 00 80                  sta $8000
+0C11F 4C EA C0                  jmp @play
+0C122                           @skipHIWORDinc
+0C122 4C EA C0                  jmp @play
+0C125                           
+0C125                           NMI
+0C125 40                        rti
+0C126                           
+0C126                           IRQ
+0C126 40                        rti
+0C127                           
+0C127 00 00 00 00 00 00 00 00.. pad $fffa
+0FFFA 00 00 00 C0 00 00         dw 0, RESET, 0

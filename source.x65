@@ -1,0 +1,313 @@
+;;Nagłówek iNES
+PRG_COUNT	equ 64
+CHR_COUNT	equ 0
+MIRRORING	equ 0
+BATTERY		equ 0
+MAPPER		equ 2
+
+db	"NES", $1a		;NES + EOF
+db	PRG_COUNT & 255	;PRG 16KB
+db	CHR_COUNT		;CHR 8KB
+db	((MAPPER & $f) << 4) | (BATTERY << 1) | MIRRORING
+db	%00001000 | (MAPPER & $f0)
+
+db	$00, $00, $00, $07, $00, $00, $00, $00
+
+;; === PRG Bank 0 === ;;
+.incbin "snd/snd_01"
+.incbin "snd/snd_02"
+.incbin "snd/snd_03"
+.incbin "snd/snd_04"
+.incbin "snd/snd_05"
+.incbin "snd/snd_06"
+.incbin "snd/snd_07"
+.incbin "snd/snd_08"
+.incbin "snd/snd_09"
+.incbin "snd/snd_10"
+.incbin "snd/snd_11"
+.incbin "snd/snd_12"
+.incbin "snd/snd_13"
+.incbin "snd/snd_14"
+.incbin "snd/snd_15"
+.incbin "snd/snd_16"
+.incbin "snd/snd_17"
+.incbin "snd/snd_18"
+.incbin "snd/snd_19"
+.incbin "snd/snd_20"
+.incbin "snd/snd_21"
+.incbin "snd/snd_22"
+.incbin "snd/snd_23"
+.incbin "snd/snd_24"
+.incbin "snd/snd_25"
+.incbin "snd/snd_26"
+.incbin "snd/snd_27"
+.incbin "snd/snd_28"
+.incbin "snd/snd_29"
+.incbin "snd/snd_30"
+.incbin "snd/snd_31"
+.incbin "snd/snd_32"
+.incbin "snd/snd_33"
+.incbin "snd/snd_34"
+.incbin "snd/snd_35"
+.incbin "snd/snd_36"
+.incbin "snd/snd_37"
+.incbin "snd/snd_38"
+.incbin "snd/snd_39"
+.incbin "snd/snd_40"
+.incbin "snd/snd_41"
+.base	$8000
+.incbin "snd/snd_42"
+db $ff
+.org	$c000
+
+;; === PRG Bank 42 === ;;
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+.base	$8000
+.org	$c000
+
+;; === PRG Bank L === ;;
+.base	$c000
+
+RESET:
+sei
+cld
+
+ldx #$40
+stx $4017
+
+ldx #$ff
+txs
+
+inx
+stx $8000
+stx $2001
+
+@clearRAM
+lda #$00
+sta $0000,x
+sta $0100,x
+sta $0300,x
+sta $0400,x
+sta $0500,x
+sta $0600,x
+sta $0700,x
+lda #$ff
+sta $0200,x
+inx
+bne @clearRAM
+
+lda $2002
+
+lda #$3f
+sta $2006
+lda #$00
+sta $2006
+
+;lda #$31
+;sta $2007
+lda #$01
+sta $2007
+lda #$01
+sta $2007
+lda #$0f
+sta $2007
+lda #$0f
+sta $2007
+
+;lda #$33
+;sta $2007
+lda #$13
+sta $2007
+lda #$13
+sta $2007
+lda #$03
+sta $2007
+lda #$0f
+sta $2007
+
+;lda #$35
+;sta $2007
+lda #$25
+sta $2007
+lda #$15
+sta $2007
+lda #$05
+sta $2007
+lda #$0f
+sta $2007
+
+;lda #$37
+;sta $2007
+lda #$37
+sta $2007
+lda #$27
+sta $2007
+lda #$17
+sta $2007
+lda #$07
+sta $2007
+
+lda #$00
+sta $2006
+sta $2006
+ldx #$20
+
+lda #$80
+sta $01
+@loadCHR0
+lda ($00),y
+asl
+asl
+adc ($00),y
+clc
+sta $2007
+iny
+bne @loadCHR0
+inc $01
+dex
+bne @loadCHR0
+
+lda $2002
+lda #$20
+sta $2006
+lda #$00
+sta $2006
+
+ldy #$10
+@loadBG
+stx $2007
+inx
+bne @loadBG
+dey
+bne @loadBG
+
+lda #$02
+sta $4014
+
+lda #$00
+sta $2006
+sta $2006
+sta $2005
+sta $2005
+
+
+lda #%00011110
+sta $2001
+stx $2000
+
+@vbl0
+bit $2002
+bpl @vbl0
+
+ldy #$80
+ldx #$00
+stx $01
+
+@play
+lda #$3f
+sta $2006
+lda ($00,x)
+cmp #$ff
+bne @skipResetPlay
+stx $00
+stx $02
+stx $8000
+sty $01
+;lda ($00,x)
+jmp @resetPlayEnd
+@skipResetPlay
+;ldx #$00
+nop
+;nop
+;nop
+;nop
+;nop
+;nop
+;lda ($00,x)
+@resetPlayEnd
+;lsr
+sta $4011
+and #$1f
+sta $2006
+
+inc $00
+bne @skipHIWORDinc
+inc $01
+lda $01
+cmp #$c0
+bne @skipHIWORDinc
+sty $01
+inc $02
+lda $02
+sta $8000
+jmp @play
+@skipHIWORDinc
+jmp @play
+
+NMI
+rti
+
+IRQ
+rti
+
+pad $fffa
+dw 0, RESET, 0
